@@ -4,7 +4,7 @@ import os
 from colorama import Fore, Style
 import numpy as np
 from main import arp_scan, print_table, store_valid_mac
-from remove_client import deauth_client
+from deauthenticator import deauth
 
 # If not sudo, don't allow to continue
 if not "SUDO_UID" in os.environ.keys():
@@ -62,7 +62,7 @@ while True:
                         print(f"{router_mac} gateway mac")
                         print(f"{mac_addr} not among the whitelist")
                         print("starting deauth.")
-                        deauth_client(router_mac, mac_addr, 0)
+                        deauth(interface, mac_addr, router_mac)
 
     elif collect_input.strip().lower() == "quit":
         sys.exit()
