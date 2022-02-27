@@ -3,7 +3,6 @@
 import sys
 from datetime import datetime
 from scapy.all import *
-from deauth import deauth
 import pandas as pd
 import numpy as np
 import threading
@@ -14,7 +13,7 @@ now = datetime.now()
 # Open default gateway addr / interface
 
 
-def arp_scan(gateway):
+def arp_scan(ip, gateway):
     #    Performs a network scan by sending ARP requests to an IP address or a range of IP addresses.
     #    Args:
     #         ip (str): An IP address or IP address range to scan. For example:
@@ -27,7 +26,7 @@ def arp_scan(gateway):
     #         ]
 
     dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
-    request = Ether(dst="ff:ff:ff:ff:ff:ff") / ARP(pdst=gateway)
+    request = Ether(dst="ff:ff:ff:ff:ff:ff") / ARP(pdst=ip)
     ans, unans = srp(request, timeout=2, retry=1, verbose=0)
     result = []
     for sent, received in ans:

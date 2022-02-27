@@ -1,9 +1,10 @@
 #!/bin/python3
 import sys
-from main import arp_scan, print_table, store_valid_mac
 import os
 from colorama import Fore, Style
 import numpy as np
+from main import arp_scan, print_table, store_valid_mac
+from remove_client import deauth_client
 
 # If not sudo, don't allow to continue
 if not "SUDO_UID" in os.environ.keys():
@@ -16,7 +17,7 @@ if not "SUDO_UID" in os.environ.keys():
 with open("_gateway/IP.txt", "r") as g_ip, open("_gateway/MAC.txt", "r") as d_mac, open(
     "_gateway/IP.txt", "r"
 ) as i_face:
-    gateway = g_ip.read().strip() + "/24"
+    gateway = g_ip.read().strip()
     g_way = gateway.split(".")[:-1]
     ips = ".".join(g_way) + ".0/24"
     router_mac = d_mac.read().strip()
@@ -28,13 +29,10 @@ result = []
 ans = []
 while True:
     collect_input = input(">>> ")
-    if collect_input.strip().lower() == "quit":
-        sys.exit()
 
-    elif collect_input.strip().lower() == "scan":
-
+    if collect_input.strip().lower() == "scan":
         print("scanning.....")
-        dic_array = arp_scan(gateway)
+        dic_array = arp_scan(ips, gateway)
         result = dic_array
         print(str(len(result)) + " hosts found")
 
@@ -54,13 +52,20 @@ while True:
         if len(result) == 0:
             print(err1)
         else:
-            get_mac_addr = np.array(ans["MAC"])
             with open("white_list/list.txt", "r") as macs:
-                strip_mac = macs.read().strip().split("\n")
-            # loop through the current mac
-            for mac_addr in get_mac_addr:
-                if mac_addr not in strip_mac:
-                    print(f"{mac_addr} not among the whitelist")
+                get_valid_mac = macs.read().strip().split("\n")
+                # loop through the current mac
+                current_mac = [str(i["MAC"]).strip() for i in result]
+                print(current_mac)
+                for mac_addr in current_mac:
+                    if (mac_addr not in get_valid_mac) and (mac_addr != router_mac):
+                        print(f"{router_mac} gateway mac")
+                        print(f"{mac_addr} not among the whitelist")
+                        print("starting deauth.")
+                        deauth_client(router_mac, mac_addr, 0)
+
+    elif collect_input.strip().lower() == "quit":
+        sys.exit()
 
     else:
         print("Invalid input")
