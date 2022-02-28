@@ -4,7 +4,6 @@ import os
 from colorama import Fore, Style
 import numpy as np
 from main import arp_scan, print_table, store_valid_mac
-from deauthenticator import deauth
 
 # If not sudo, don't allow to continue
 if not "SUDO_UID" in os.environ.keys():
@@ -18,7 +17,7 @@ with open("_gateway/IP.txt", "r") as g_ip, open("_gateway/MAC.txt", "r") as d_ma
     "_gateway/IP.txt", "r"
 ) as i_face:
     gateway = g_ip.read().strip()
-    g_way = gateway.split(".")[:-1]
+    g_way = gateway + "/24"
     ips = ".".join(g_way) + ".0/24"
     router_mac = d_mac.read().strip()
     interface = i_face.read().strip()
@@ -32,7 +31,7 @@ while True:
 
     if collect_input.strip().lower() == "scan":
         print("scanning.....")
-        dic_array = arp_scan(ips, gateway)
+        dic_array = arp_scan(g_way, gateway)
         result = dic_array
         print(str(len(result)) + " hosts found")
 
