@@ -50,13 +50,16 @@ def values_addr(df):
 
 
 def program_t(array_val, array_vals):
-    file = open("store/txt/file.txt", "a")
+    with open("_gateway/MAC.txt", "r") as f1:
+        f_1 = f1.read().strip()
+    file = open("store/txt/file.txt", "w")
     data = zip(array_val, array_vals)
     for a, b in data:
         mac = a.strip()
         ch = b.strip()
         mac_ch = f"{mac}-{ch}"
-        file.write(f"{mac_ch}\n")
+        if f_1 == mac:
+            file.write(f"{mac_ch}")
 
 
 # def file_store(mac_value, path2):
