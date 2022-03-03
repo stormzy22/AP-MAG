@@ -29,7 +29,9 @@ def save_valid_mac():
 
 
 def compare_mac():
+    subprocess.call("./check-scanner.sh", shell=True)
     invalid_mac = []
+    s_in = open("store/txt/file.txt", "a")
     with open("white_list/list.txt", "r") as f1:
         f2 = f1.read().strip().split()
     res = print_result("result/arp-scan.txt")
@@ -37,6 +39,7 @@ def compare_mac():
     for i in mac:
         if i not in f2:
             invalid_mac.append(i)
+            s_in.write(f"{i}\n")
     return len(invalid_mac)
 
 

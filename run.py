@@ -6,6 +6,7 @@ import sys
 import os
 import subprocess
 
+
 msg = """
     [[red]![/red]] input [bold red]scan[/bold red] to discover connected devices on your network
     [[red]![/red]] input [bold red]hosts[/bold red] to view connected devices
