@@ -20,31 +20,31 @@ msg = """
 print(f"[bold green]{msg}[/bold green]")
 
 while True:
-    ci = input("[!] ")
-    fci = ci.strip().lower()
-    if fci == "scan":
+    user_input = input("[!] ")
+    format_user_input = user_input.strip().lower()
+    if format_user_input == "scan":
         get_host()
         print_result("result/arp-scan.txt")
         print("[blue]No of host found ↓[/blue]")
         os.system("wc -l result/arp-scan.txt | cut -d ' ' -f1")
         print("[bold purple]-[/bold purple]" * 50)
-    elif fci == "hosts":
+    elif format_user_input == "hosts":
         hosts = print_result("result/arp-scan.txt")
         print(f"[bold cyan]{hosts}[/bold cyan]")
-    elif fci == "save":
+    elif format_user_input == "save":
         save_valid_mac()
         print("[bold green] saved [/bold green]")
-    elif fci == "check":
+    elif format_user_input == "check":
         res = compare_mac()
         print(f"[bold red]{res} invalid host[/bold red]")
-    elif fci == "deauth":
+    elif format_user_input == "deauth":
         deauth()
-    elif fci == "clear":
+    elif format_user_input == "clear":
         sys.stderr.write("\x1b[2J\x1b[H")
-    elif fci == "exit" or fci == "quit":
+    elif format_user_input == "exit" or format_user_input == "quit":
         subprocess.call("./clear.sh", shell=True)
         sys.exit()
-    elif fci == "exit -w" or fci == "quit -w":
+    elif format_user_input == "exit -w" or format_user_input == "quit -w":
         subprocess.call("./clear_white_list.sh", shell=True)
         sys.exit()
     else:

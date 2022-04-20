@@ -1,0 +1,26 @@
+#!/bin/bash
+
+# INSTALL ARP-SCAN
+sudo apt install arp-scan
+if [ "$?" -eq 0 ] 
+then
+echo -e "\e[1m\e[32m KUDOS \e[0m"
+else
+echo -e "\e[1m\e[5m failed to install arp-scan \e[0m"
+exit 1 
+fi
+
+# INSTALL AIRCRACK-NG
+sudo apt install aircrack-ng
+if [ "$?" -eq 0 ] 
+then
+echo -e "\e[1m\e[32m KUDOS \e[0m"
+else
+echo -e "\e[1m\e[5m failed to install aircrack-ng \e[0m" 
+exit 1 
+fi
+echo -e "\e[1m\e[32m starting program\e[0m"
+clear
+
+pip install -r requirements.txt
+

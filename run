@@ -1,5 +1,7 @@
 #!/bin/bash
 
+./install
+
 get_router_ip () {
     if [ ! -d "_gateway" ]
     then
