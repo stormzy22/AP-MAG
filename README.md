@@ -52,4 +52,4 @@ kicks out (de-auth) the invalid devices on the network
 <h2><u>Contributors</u></h2>
 
 - [stormzy22](https://github.com/stormzy22)
-- []()
+- [Okon Divine](https://github.com/Okon-Divine)
