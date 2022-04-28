@@ -3,10 +3,7 @@
 ./install
 
 get_router_ip () {
-    if [ ! -d "_gateway" ]
-    then
-    mkdir _gateway
-    fi
+    [ ! -d "_gateway" ] && mkdir _gateway
     touch white_list/list.txt && touch result/arp-scan.txt
     router_ip=$(netstat -nr | awk '$1 == "0.0.0.0"{print$2}')
     router_mac=$(ip neigh|grep "$(ip -4 route list 0/0|head -1|cut -d ' ' -f3) "|cut -d' ' -f5|tr '[a-f]' '[A-F]')
@@ -23,7 +20,16 @@ get_router_ip () {
 }
 get_router_ip
 
-logo=$(figlet AP-MAG)
+clear
+logo=" ▄▄▄       ██▓███         ███▄ ▄███▓ ▄▄▄        ▄████ 
+▒████▄    ▓██░  ██▒      ▓██▒▀█▀ ██▒▒████▄     ██▒ ▀█▒
+▒██  ▀█▄  ▓██░ ██▓▒      ▓██    ▓██░▒██  ▀█▄  ▒██░▄▄▄░
+░██▄▄▄▄██ ▒██▄█▓▒ ▒      ▒██    ▒██ ░██▄▄▄▄██ ░▓█  ██▓
+ ▓█   ▓██▒▒██▒ ░  ░      ▒██▒   ░██▒ ▓█   ▓██▒░▒▓███▀▒
+ ▒▒   ▓▒█░▒▓▒░ ░  ░      ░ ▒░   ░  ░ ▒▒   ▓▒█░ ░▒   ▒ 
+  ▒   ▒▒ ░░▒ ░           ░  ░      ░  ▒   ▒▒ ░  ░   ░ 
+  ░   ▒   ░░             ░      ░     ░   ▒   ░ ░   ░ 
+      ░  ░                      ░         ░  ░      ░ 
+"
 echo -e "\e[1m\e[32m$logo\e[0m"
-
-sudo python3 run.py
+python3 run.py

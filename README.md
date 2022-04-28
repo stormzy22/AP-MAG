@@ -1,3 +1,8 @@
+<img src="logo/AP-MAG-OFFiCiAL.png" alt="AP-MAG logo" style="display:block; margin:0 auto;"/>
+
+<br/>
+<br/>
+
 # AP-MAG
 
 ### **Access Point Manager(AP-MAG)** is a **Linux based** network scanning tool that lets the user decide devices authorized to be on their network. The program also automatically kicks out (de-authenticate) devices not meant to be on the network.
@@ -8,6 +13,8 @@
 
 - git clone [https://github.com/stormzy22/AP-MAG](https://github.com/stormzy22/AP-MAG)
 - cd AP-MAG
+- pip install -r requirements.txt
+
 
 <h2><u>Usage</u></h2>
 

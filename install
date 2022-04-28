@@ -22,5 +22,4 @@ fi
 echo -e "\e[1m\e[32m starting program\e[0m"
 clear
 
-pip install -r requirements.txt
 
