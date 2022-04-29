@@ -25,9 +25,9 @@ while True:
     if format_user_input == "scan":
         get_host()
         print_result("result/arp-scan.txt")
-        print("[blue]No of host found ↓[/blue]")
+        print("[bold blue]NUMBER OF HOST FOUND ↓[/bold blue]")
         os.system("wc -l result/arp-scan.txt | cut -d ' ' -f1")
-        print("[bold purple]-[/bold purple]" * 50)
+        print("\r")
     elif format_user_input == "hosts":
         hosts = print_result("result/arp-scan.txt")
         print(f"[bold cyan]{hosts}[/bold cyan]")

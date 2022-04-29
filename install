@@ -10,6 +10,11 @@ locate_AIRCRACKNG=$(which aircrack-ng)
 [ ! -f "$locate_AIRCRACKNG" ] && sudo apt install aircrack-ng
 [ $? -ne 0 ] && exit 1
 
+# INSTALL FIGLET
+LOCATE_FIGLET=$(which figlet)
+[ ! -f "$LOCATE_FIGLET" ] && sudo apt install figlet
+[ $? -ne 0 ] && exit 1
+
 # CREATING ESSENTIAL DIRECTORIES
 [ ! -d _gateway ] && mkdir _gateway
 [ ! -d result ] && mkdir result

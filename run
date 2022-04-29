@@ -1,10 +1,8 @@
 #!/bin/bash
 
-
-
 ./install
 
-get_router_ip () {
+get_router_credentials () {
     touch white_list/list.txt && touch result/arp-scan.txt
     router_ip=$(netstat -nr | awk '$1 == "0.0.0.0"{print$2}')
     router_mac=$(ip neigh|grep "$(ip -4 route list 0/0|head -1|cut -d ' ' -f3) "|cut -d' ' -f5|tr '[a-f]' '[A-F]')
@@ -15,22 +13,15 @@ get_router_ip () {
     then
     echo "$router_ip" > _gateway/IP.txt && echo "$router_mac" > _gateway/MAC.txt && echo "$interface" > _gateway/IF.txt && echo "$bssid" > _gateway/BSSID.txt && echo "$channel" > _gateway/CH.txt
     else
-    echo -e "\e[31m\e[1mPls connect to a router\e[0m"
+    echo -e "\e[1m\e[46m\e[37m\e[5m PLEASE CONNECT TO A ROUTER \e[0m" | sed  -e :a -e "s/^.\{1,$(tput cols)\}$/ & /;ta" | tr -d '\n' | head -c $(tput cols)
     exit
     fi 
 }
-get_router_ip
+get_router_credentials
 
 clear
-logo=" ▄▄▄       ██▓███         ███▄ ▄███▓ ▄▄▄        ▄████ 
-▒████▄    ▓██░  ██▒      ▓██▒▀█▀ ██▒▒████▄     ██▒ ▀█▒
-▒██  ▀█▄  ▓██░ ██▓▒      ▓██    ▓██░▒██  ▀█▄  ▒██░▄▄▄░
-░██▄▄▄▄██ ▒██▄█▓▒ ▒      ▒██    ▒██ ░██▄▄▄▄██ ░▓█  ██▓
- ▓█   ▓██▒▒██▒ ░  ░      ▒██▒   ░██▒ ▓█   ▓██▒░▒▓███▀▒
- ▒▒   ▓▒█░▒▓▒░ ░  ░      ░ ▒░   ░  ░ ▒▒   ▓▒█░ ░▒   ▒ 
-  ▒   ▒▒ ░░▒ ░           ░  ░      ░  ▒   ▒▒ ░  ░   ░ 
-  ░   ▒   ░░             ░      ░     ░   ▒   ░ ░   ░ 
-      ░  ░                      ░         ░  ░      ░ 
-"
-echo -e "\e[1m\e[32m$logo\e[0m"
+echo ""
+LOGOTXT="AP -- MAG"
+LOGO=$(figlet -w $(tput cols) -f Bloody -c "$LOGOTXT")
+echo -e "\e[1m\e[32m$LOGO\e[0m"
 python3 run.py

@@ -1,10 +1,14 @@
 #!/bin/bash
 
-interface=$(cat _gateway/IF.txt)
+interface_path="_gateway/IF.txt"
+interface=$(cat $interface_path)
 
-path_arp="/usr/sbin/arp-scan"
+if [ "${#interface}" -ne "0" ];then
+sudo arp-scan --localnet -I "$interface" -x > result/arp-scan.txt
+echo -ne "\e[37m\e[42m\e[1m DONE \e[0m" "<" $(for i in $(seq 1 `expr $(tput cols) / 2`); do printf "="; done)"\r\n"
+else
+echo "can't find interface"
+echo "exiting program"
+fi
 
-[ -f "$path_arp" ] && echo -e "\e[32m\e[1m  \e[0m" || sudo apt install arp-scan -y
-[ -d "result" ] && echo "" || mkdir result
-sudo "$path_arp" --localnet -I "$interface" -x > result/arp-scan.txt
-echo -e "\e[32m\e[1m Scanning... \e[0m"
+
