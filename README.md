@@ -14,6 +14,7 @@
 - git clone [https://github.com/stormzy22/AP-MAG](https://github.com/stormzy22/AP-MAG)
 - cd AP-MAG
 - pip install -r requirements.txt
+- ./run
 
 
 <h2><u>Usage</u></h2>

@@ -1,5 +1,11 @@
 #!/bin/bash
 
+CHECKROOT () {
+    echo -e "\e[1m\e[46m\e[37m\e[5m PLEASE RUN THIS SCRIPT AS ROOT \e[0m" | sed  -e :a -e "s/^.\{1,$(tput cols)\}$/ & /;ta" | tr -d '\n' | head -c $(tput cols)
+    exit 1
+}
+[ "$EUID" -ne 0 ] && CHECKROOT
+
 ./install
 
 get_router_credentials () {
