@@ -1,13 +1,13 @@
 #!/bin/bash
 
 # INSTALL ARP-SCAN
-locate_ARPSCAN=$(which arp-scan)
-[ ! -f "$locate_ARPSCAN" ] && sudo apt install arp-scan
+LOCATE_ARPSCAN=$(which arp-scan)
+[ ! -f "$LOCATE_ARPSCAN" ] && sudo apt install arp-scan
 [ $? -ne 0 ] && exit 1
 
 # INSTALL AIRCRACK-NG
-locate_AIRCRACKNG=$(which aircrack-ng)
-[ ! -f "$locate_AIRCRACKNG" ] && sudo apt install aircrack-ng
+LOCATE_AIRCRACKNG=$(which aircrack-ng)
+[ ! -f "$LOCATE_AIRCRACKNG" ] && sudo apt install aircrack-ng
 [ $? -ne 0 ] && exit 1
 
 # INSTALL FIGLET
@@ -15,7 +15,8 @@ LOCATE_FIGLET=$(which figlet)
 [ ! -f "$LOCATE_FIGLET" ] && sudo apt install figlet
 [ $? -ne 0 ] && exit 1
 
-# CREATING ESSENTIAL DIRECTORIES
+# CREATING ESSENTIAL DIR
 [ ! -d _gateway ] && mkdir _gateway
 [ ! -d result ] && mkdir result
 [ ! -d white_list ] && mkdir white_list
+

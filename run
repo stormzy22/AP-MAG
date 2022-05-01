@@ -3,7 +3,7 @@
 ./install
 
 get_router_credentials () {
-    touch white_list/list.txt && touch result/arp-scan.txt
+    touch white_list/list.txt && touch result/arp-scan.txt && touch store/txt/file.txt
     router_ip=$(netstat -nr | awk '$1 == "0.0.0.0"{print$2}')
     router_mac=$(ip neigh|grep "$(ip -4 route list 0/0|head -1|cut -d ' ' -f3) "|cut -d' ' -f5|tr '[a-f]' '[A-F]')
     interface=$(ip route get 8.8.8.8 | grep -oP 'dev \K[^ ]+')

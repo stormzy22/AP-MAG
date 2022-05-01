@@ -5,6 +5,7 @@ from main import get_host, print_result, save_valid_mac, compare_mac, deauth
 import sys
 import os
 import subprocess
+import time
 
 
 msg = """
@@ -27,16 +28,19 @@ while True:
         print_result("result/arp-scan.txt")
         print("[bold blue]NUMBER OF HOST FOUND ↓[/bold blue]")
         os.system("wc -l result/arp-scan.txt | cut -d ' ' -f1")
-        print("\r")
+        print("\n")
     elif format_user_input == "hosts":
         hosts = print_result("result/arp-scan.txt")
-        print(f"[bold cyan]{hosts}[/bold cyan]")
+        print(f"[bold cyan]{hosts}[/bold cyan]\n")
     elif format_user_input == "save":
+        print("[bold green] SAVING..... [/bold green]", end="\r")
         save_valid_mac()
-        print("[bold green] saved [/bold green]")
+        print("[bold green] SAVED ☑️ [/bold green]", end="\r")
+        print()
+        print("\n")
     elif format_user_input == "check":
         res = compare_mac()
-        print(f"[bold red]{res} invalid host[/bold red]")
+        print(f"[bold red]{res} invalid host[/bold red]\n")
     elif format_user_input == "deauth":
         deauth()
     elif format_user_input == "clear":

@@ -5,4 +5,4 @@ current_list=$(sudo cat store/txt/file.txt)
 interface=$(sudo cat _gateway/IF.txt)
 ch=$(sudo cat _gateway/CH.txt)
 
-sudo airodump-ng --bssid "$router_mac" -c "$ch" "$interface"
+x-terminal-emulator -e sudo airodump-ng --bssid "$router_mac" -c "$ch" "$interface"

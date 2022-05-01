@@ -15,6 +15,7 @@ def print_result(path):
 
 
 def save_valid_mac():
+
     with open("white_list/list.txt", "r") as f1:
         stored_mac = f1.read().strip().split()
     file = open("white_list/list.txt", "a")
@@ -28,18 +29,24 @@ def save_valid_mac():
                 file.write(f"{val}\n")
 
 
+def append_to_blacklist(mac):
+    storeINVALID = open("store/txt/file.txt", "a")
+    with open("store/txt/file.txt", "r") as f1:
+        bl_store = f1.read().strip().split()
+    [storeINVALID.write(f"{i}\n") for i in mac if i not in bl_store]
+
+
 def compare_mac():
     subprocess.call("./check-scanner.sh", shell=True)
     invalid_mac = []
-    s_in = open("store/txt/file.txt", "a")
     with open("white_list/list.txt", "r") as f1:
-        f2 = f1.read().strip().split()
+        w_list = f1.read().strip().split()
     res = print_result("result/arp-scan.txt")
     mac = np.array(res["MAC"].unique())
     for i in mac:
-        if i not in f2:
+        if i not in w_list and i not in invalid_mac:
             invalid_mac.append(i)
-            s_in.write(f"{i}\n")
+    append_to_blacklist(invalid_mac)
     return len(invalid_mac)
 
 
