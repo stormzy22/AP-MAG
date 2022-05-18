@@ -1,3 +1,4 @@
 #!/bin/bash
+
 ./clear.sh
-sudo rm -rfv white_list/list.txt
+sudo rm -rfv store/white_list/list.txt

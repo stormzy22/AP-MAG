@@ -3,6 +3,7 @@ import pandas as pd
 import subprocess
 import numpy as np
 from rich import print
+from pathlib import Path
 
 
 def get_host():
@@ -16,9 +17,9 @@ def print_result(path):
 
 def save_valid_mac():
 
-    with open("white_list/list.txt", "r") as f1:
+    with open("store/white_list/list.txt", "r") as f1:
         stored_mac = f1.read().strip().split()
-    file = open("white_list/list.txt", "a")
+    file = open("store/white_list/list.txt", "a")
     res = print_result("result/arp-scan.txt")
     valid_mac = np.array(res["MAC"].unique())
     if len(valid_mac) == 0:
@@ -30,8 +31,8 @@ def save_valid_mac():
 
 
 def append_to_blacklist(mac):
-    storeINVALID = open("store/txt/file.txt", "a")
-    with open("store/txt/file.txt", "r") as f1:
+    storeINVALID = open("store/black_list/file.txt", "a")
+    with open("store/black_list/file.txt", "r") as f1:
         bl_store = f1.read().strip().split()
     [storeINVALID.write(f"{i}\n") for i in mac if i not in bl_store]
 
@@ -39,7 +40,7 @@ def append_to_blacklist(mac):
 def compare_mac():
     subprocess.call("./check-scanner.sh", shell=True)
     invalid_mac = []
-    with open("white_list/list.txt", "r") as f1:
+    with open("store/white_list/list.txt", "r") as f1:
         w_list = f1.read().strip().split()
     res = print_result("result/arp-scan.txt")
     mac = np.array(res["MAC"].unique())
@@ -47,8 +48,17 @@ def compare_mac():
         if i not in w_list and i not in invalid_mac:
             invalid_mac.append(i)
     append_to_blacklist(invalid_mac)
-    return len(invalid_mac)
+    with open("store/black_list/file.txt", "r") as f2:
+        b_list = f2.read().split()
+    return len(b_list)
 
 
 def deauth():
-    subprocess.call("./deauth.sh", shell=True)
+    err_msg = "\tTHERE IS NO BLACKLIST AVAILABLE TO DISPLAY, RUN THE CHECK"
+    pathtoblacklist = "store/black_list/file.txt"
+    path = Path(pathtoblacklist)
+    if not path.is_file():
+        return err_msg
+    else:
+        subprocess.call("./deauth.sh", shell=True)
+        return "DEAUTHING........."

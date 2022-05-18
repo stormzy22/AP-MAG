@@ -31,7 +31,7 @@ while True:
         print("\n")
     elif format_user_input == "hosts":
         hosts = print_result("result/arp-scan.txt")
-        print(f"[bold cyan]{hosts}[/bold cyan]\n")
+        print(f"\n\t[bold cyan]{hosts}[/bold cyan]\n")
     elif format_user_input == "save":
         print("[bold green] SAVING..... [/bold green]", end="\r")
         save_valid_mac()
@@ -40,9 +40,10 @@ while True:
         print("\n")
     elif format_user_input == "check":
         res = compare_mac()
-        print(f"[bold red]{res} invalid host[/bold red]\n")
+        print(f"\n[bold red]{res} INVALID HOST[/bold red]\n")
     elif format_user_input == "deauth":
-        deauth()
+        r_txt = deauth()
+        print(f"\n\t[bold white]{r_txt}[/bold white]\n")
     elif format_user_input == "clear":
         sys.stderr.write("\x1b[2J\x1b[H")
     elif format_user_input == "exit" or format_user_input == "quit":

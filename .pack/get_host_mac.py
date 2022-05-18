@@ -11,7 +11,7 @@ def read_data(path):
 
 def get_mac_vals(df):
     file = open("store/txt/current.txt", "a")
-    with open("white_list/list.txt", "r") as valid_mac:
+    with open("store/white_list/list.txt", "r") as valid_mac:
         read_vm = valid_mac.read().strip().split("\n")
     mac_value = np.array(df["BSSID"][2:])
     for mac in mac_value:

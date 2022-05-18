@@ -2,7 +2,7 @@
 
 router_mac=$(sudo cat _gateway/BSSID.txt)
 interface=$(sudo cat _gateway/IF.txt)
-macs="store/txt/file.txt"
+macs="store/black_list/file.txt"
 
 
 sudo ifconfig "$interface" down
