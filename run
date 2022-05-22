@@ -10,7 +10,6 @@ CHECKROOT () {
 ./install
 
 get_router_credentials () {
-    touch store/white_list/list.txt && touch result/arp-scan.txt && touch store/black_list/file.txt
     router_ip=$(netstat -nr | awk '$1 == "0.0.0.0"{print$2}')
     router_mac=$(ip neigh|grep "$(ip -4 route list 0/0|head -1|cut -d ' ' -f3) "|cut -d' ' -f5|tr '[a-f]' '[A-F]')
     interface=$(ip route get 8.8.8.8 | grep -oP 'dev \K[^ ]+')
@@ -18,7 +17,8 @@ get_router_credentials () {
     channel=$(iw "$interface" info | grep "channel"| awk '{print $2}')
     if [ "$router_ip" != "" ] || [ "$router_mac" != "" ] || [ "$ssid" != "" ] 
     then
-    echo "$router_ip" > _gateway/IP.txt && echo "$router_mac" > _gateway/MAC.txt && echo "$interface" > _gateway/IF.txt && echo "$bssid" > _gateway/BSSID.txt && echo "$channel" > _gateway/CH.txt
+    touch store/white_list/list.txt && touch RES/arp-scan.txt && touch store/black_list/file.txt
+    echo "$router_ip" > ROUTER/IP.txt && echo "$router_mac" > ROUTER/MAC.txt && echo "$interface" > ROUTER/IF.txt && echo "$bssid" > ROUTER/BSSID.txt && echo "$channel" > ROUTER/CH.txt
     else
     echo -e "\e[1m\e[46m\e[37m\e[5m PLEASE CONNECT TO A ROUTER \e[0m" | sed  -e :a -e "s/^.\{1,$(tput cols)\}$/ & /;ta" | tr -d '\n' | head -c $(tput cols)
     exit
@@ -29,7 +29,7 @@ get_router_credentials
 clear
 echo ""
 LOGOTXT="AP -- MAG"
-FONTPATH="font/Bloody.flf"
+FONTPATH="FONT/Bloody.flf"
 LOGO=$(figlet -w $(tput cols) -f "$FONTPATH" -c "$LOGOTXT")
 echo -e "\e[1m\e[32m$LOGO\e[0m"
 python3 run.py

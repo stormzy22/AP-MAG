@@ -16,8 +16,8 @@ LOCATE_FIGLET=$(which figlet)
 [ $? -ne 0 ] && exit 1
 
 # CREATING ESSENTIAL DIR
-[ ! -d _gateway ] && mkdir _gateway
-[ ! -d result ] && mkdir result
+[ ! -d ROUTER ] && mkdir ROUTER
+[ ! -d RES ] && mkdir RES
 [ ! -d store ] && mkdir store
 [ ! -d store/white_list ] && mkdir store/white_list
 [ ! -d store/black_list ] && mkdir store/black_list

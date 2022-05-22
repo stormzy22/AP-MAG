@@ -1,4 +1,4 @@
 #!/bin/bash
 
-./clear.sh
+./clean.sh
 sudo rm -rfv store/white_list/list.txt

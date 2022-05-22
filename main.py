@@ -10,7 +10,7 @@ def get_host():
     subprocess.call("./scanner.sh", shell=True)
 
 
-def print_result(path):
+def print_RES(path):
     res = pd.read_table(path, delimiter="\t", header=None, names=["IP", "MAC", "NAME"])
     return res
 
@@ -20,7 +20,7 @@ def save_valid_mac():
     with open("store/white_list/list.txt", "r") as f1:
         stored_mac = f1.read().strip().split()
     file = open("store/white_list/list.txt", "a")
-    res = print_result("result/arp-scan.txt")
+    res = print_RES("RES/arp-scan.txt")
     valid_mac = np.array(res["MAC"].unique())
     if len(valid_mac) == 0:
         print("[red bold]Pls run the scan command[/red bold]")
@@ -42,7 +42,7 @@ def compare_mac():
     invalid_mac = []
     with open("store/white_list/list.txt", "r") as f1:
         w_list = f1.read().strip().split()
-    res = print_result("result/arp-scan.txt")
+    res = print_RES("RES/arp-scan.txt")
     mac = np.array(res["MAC"].unique())
     for i in mac:
         if i not in w_list and i not in invalid_mac:
