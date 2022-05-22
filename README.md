@@ -24,11 +24,11 @@
 ![STEP 1](IMG/screenshots/s1.png "SCAN")
 
 ---
-2. ### input **hosts** to view the list of connected devices
+2. ### input **hosts** to view the list of connected devices.
 ![STEP 2](IMG/screenshots/s2.png "DISPLAY HOSTS")
 
 ---
-3. ### input **save** to whitelist the current devices
+3. ### input **save** to whitelist the current devices.
 ![STEP 3](IMG/screenshots/s3.png "SAVE HOSTS")
 
 ---
@@ -36,15 +36,19 @@
 ![STEP 4](IMG/screenshots/s4.png "CHECK")
 
 ---
+5. ### input **deauth** to deauthenticate invalid devices on the wireless access point.<br/> Close the terminal once the wireless access point have be identified.
 ![STEP 5](IMG/screenshots/s5.png "DEAUTH STEP 1")
 
 ---
+6. ### Wait for 3sec then close the terminal.
 ![STEP 6](IMG/screenshots/s6.png "DEAUTH STEP 2")
 
 ---
+7. ### Here's the final stage of deauthentication where all the invalid devices are kicked out.
 ![STEP 7](IMG/screenshots/s7.png "DEAUTH STEP 3")
 
 ---
+8. ### Exiting and Cleaning up the program.
 ![STEP 7](IMG/screenshots/s8.png "EXITING THE PROGRAM")
 
 ---
@@ -54,22 +58,3 @@
 - [stormzy22](https://github.com/stormzy22)
 - [Okon Divine](https://github.com/Okon-Divine)
 
-<!-- msg = """
-    STEP 1:\b
-    \tinput [bold green]scan[/bold green] to discover connected devices on your network\b
-    STEP 2:\b
-    \tinput [bold green]hosts[/bold green] to view connected devices\b
-    STEP 3:\b
-    \tinput [bold green]save[/bold green] to whitelist the current devices\b
-    STEP 4:\b
-    \tinput [bold green]check[/bold green] to validate the current devices connected to the access point.
-    \t[yellow bold]NOTE:[/yellow bold] The [bold green]check[/bold green] command compares the current devices connected to the access point
-    \twith the whitelist then filters the devices that aren't in the whitelist and save them in the blacklist\b
-    STEP 5:\b
-    \tinput [bold green]deauth[/bold green] to deauthenticate invalid devices\b
-    STEP 6:\b
-    \tinput [bold green]exit / quit[/bold green] to exit the program and clean files created during the session excluding the whitelist
-    STEP 7:\b
-    \tinput [bold green]exit -w / quit -w [/bold green] to exit the program and clean files created during the session including the whitelist
-
-""" -->
